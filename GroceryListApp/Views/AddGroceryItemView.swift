@@ -18,7 +18,7 @@ struct AddGroceryItemView: View {
         NavigationStack {
             VStack {
                 Form {
-                    TextField("Enter the grocery item name", text: $name)
+                    TextField("Enter the grocery item name", text: $name, onCommit: addGroceryItem)
                 }
                 if showingAdded {
                     Text("Added \(previousName)!")

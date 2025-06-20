@@ -45,7 +45,9 @@ struct ContentView: View {
                                     GroceryRowView(groceryItem: groceryItem)
                                 }
                             }
-                            .onDelete(perform: deleteItems)
+                            .onDelete { indexSet in
+                                deleteItems(group: group, offsets: indexSet)
+                            }
                         }
                     }
                 }
@@ -96,10 +98,10 @@ struct ContentView: View {
         showingAddItemModal = false
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteItems(group: GroceryItemGroup, offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(allItems[index])
+                modelContext.delete(group.groceryItems[index])
             }
         }
     }
